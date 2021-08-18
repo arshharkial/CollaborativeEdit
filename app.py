@@ -6,7 +6,7 @@ sio = socketio.Server()
 app = socketio.WSGIApp(sio)
 
 app = socketio.WSGIApp(sio, static_files={
-    '/': './static/'
+    '/': './public/'
 })
 
 
