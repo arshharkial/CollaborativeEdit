@@ -1,20 +1,20 @@
-import socketio
-
-sio = socketio.Server()
-
-# wrap socketio app into a WSGI app
-app = socketio.WSGIApp(sio)
-
-app = socketio.WSGIApp(sio, static_files={
-    '/': './public/'
-})
+from flask import Flask, render_template
+from flask_socketio import SocketIO
 
 
-@sio.event
-def connect(sid, environ):
-    print(sid, 'connected')
+app = Flask(__name__,
+            static_url_path='',
+            static_folder='public/static',
+            template_folder='public/templates')
+app.config['SECRET_KEY'] = 'secret!'
+
+sio = SocketIO(app)
 
 
-@sio.event
-def disconnect(sid):
-    print(sid, 'disconnected')
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+if __name__ == '__main__':
+    sio.run(app)
