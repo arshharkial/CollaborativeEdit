@@ -24,4 +24,5 @@ def index():
 
 
 if __name__ == '__main__':
+    # sio.run(app)
     sio.run(app, host="localhost", port=8000, debug=True)
