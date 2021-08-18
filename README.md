@@ -1,5 +1,7 @@
 
-## run asychronous with eventlet
+# Collaborative Editing POC
+
+## Run asychronous with eventlet
 
 socketio requires a multi-threaded web-server
 
@@ -10,6 +12,13 @@ socketio requires a multi-threaded web-server
 ```
 gunicorn -k eventlet -w 1 --reload app:app
 ```
+
+In case production
+
+```
+gunicorn --bind 0.0.0.0:5000 --worker-class eventlet -w 1 wsgi:app
+```
+## Debugging and Troubleshooting
 
 In case of
 
