@@ -1,11 +1,9 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-
-
 # import logging
+
 # logging.basicConfig(level=logging.INFO)
 # logger = logging.getLogger(__name__)
-
 
 app = Flask(__name__,
             static_url_path='',
@@ -26,3 +24,4 @@ def index():
 if __name__ == '__main__':
     # sio.run(app)
     sio.run(app, host="localhost", port=8000, debug=True)
+    # sio.run(app, host='0.0.0.0', port=5000) # production
