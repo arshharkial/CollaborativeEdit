@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
+import json
 
 # import logging
 
@@ -16,7 +17,6 @@ app.config["SECRET_KEY"] = "secret!"
 sio = SocketIO(app, logger=True, engineio_logger=True)
 
 
-
 @app.route("/")
 def index():
     # logger.info('serving root')
@@ -28,12 +28,30 @@ def index():
 @sio.event
 def connect():
     print(f"{request.sid} connected")
+    with open("text.json", "r") as file:
+        data = file.read()
+        if data:
+            data = json.loads(data)
+            emit("UpdateText", data["files"][-1]["Data"], broadcast=True)
 
 
 @sio.on("TextUpdated")
 def update_text(message):
-    with open("text.txt", "w+") as file:
-        file.write(message)
+    with open("text.json", "r") as file:
+        versions = file.read()
+    if versions:
+        versions = json.loads(versions)
+        print(versions)
+        version_number = len(versions.get("files")) + 1
+        data = {"Version": version_number, "Data": message}
+        if "files" in versions and versions["files"]:
+            versions["files"].append(data)
+        print(versions)
+    else:
+        versions = {}
+        versions["files"] = [{"Version": 1, "Data": message}]
+    with open("text.json", "w+") as file:
+        file.write(json.dumps(versions, indent=4))
         emit("UpdateText", message, broadcast=True)
 
 
