@@ -15,6 +15,11 @@ function myFunction(){
     console.log("Button Clicked");
 }
 
+function emitToAll(){
+    sio.emit("UpdateAll", document.getElementById("TextArea").value);
+}
+
+
 sio.on('disconnect', () => {
     console.log('disconnected');
 });
