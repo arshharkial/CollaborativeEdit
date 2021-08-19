@@ -5,20 +5,22 @@ sio.on('connect', () => {
     console.log('connected');
 });
 
+sio.on("Start", (message) => {
+    message.forEach((element, index, array) => {
+        document.getElementById(element.TextArea).value = element.Data;
+    });
+})
+
 sio.on("UpdateText", (message) => {
-    document.getElementById("TextArea").value = message;
+    textarea = message["TextArea"]
+    document.getElementById(textarea).value = message["Data"];
     console.log("Message Received");
 });
 
-function myFunction(){
-    sio.emit("TextUpdated", document.getElementById("TextArea").value);
+function myFunction(TextArea){
+    sio.emit("TextUpdated", {"TextArea": TextArea, "Data": document.getElementById(TextArea).value});
     console.log("Button Clicked");
 }
-
-function emitToAll(){
-    sio.emit("UpdateAll", document.getElementById("TextArea").value);
-}
-
 
 sio.on('disconnect', () => {
     console.log('disconnected');
