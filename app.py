@@ -15,6 +15,7 @@ app.config["SECRET_KEY"] = "secret!"
 # sio = SocketIO(app)
 # sio = SocketIO(app, async_mode=async_mode)
 sio = SocketIO(app, logger=True, engineio_logger=True)
+TEXTAREAS = ["TextArea1", "TextArea2", "TextArea3", "TextArea4", "TextArea5"]
 
 
 @app.route("/")
@@ -31,8 +32,11 @@ def connect():
     with open("text.json", "r") as file:
         data = file.read()
         if data:
-            data = json.loads(data)
-            emit("UpdateText", data["files"][-1]["Data"], broadcast=True)
+            data = json.loads(data)["files"][-1]
+            message = []
+            for TextArea in TEXTAREAS:
+                message.append({"TextArea": TextArea, "Data": data[TextArea]})
+            emit("Start", message, broadcast=True)
 
 
 @sio.on("TextUpdated")
@@ -42,20 +46,24 @@ def update_text(message):
     if versions:
         versions = json.loads(versions)
         version_number = len(versions.get("files")) + 1
-        data = {"Version": version_number, "Data": message}
+        last_version = versions["files"][-1]
+        last_version["Version"] = version_number
+        last_version[message["TextArea"]] = message["Data"]
         if "files" in versions and versions["files"]:
-            versions["files"].append(data)
+            versions["files"].append(last_version)
     else:
         versions = {}
-        versions["files"] = [{"Version": 1, "Data": message}]
+        version = {}
+        version["Version"] = 1
+        for TextArea in TEXTAREAS:
+            if message["TextArea"] == TextArea:
+                version[TextArea] = message["Data"]
+            else:
+                version[TextArea] = ""
+        versions["files"] = [version]
     with open("text.json", "w+") as file:
         file.write(json.dumps(versions, indent=4))
         emit("UpdateText", message, broadcast=True)
-
-
-@sio.on("UpdateAll")
-def update_all(message):
-    emit("UpdateText", message, broadcast=True)
 
 
 @sio.on("disconnect")
