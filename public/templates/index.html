@@ -8,7 +8,7 @@
     <body>
         <h1>Collaborative Editing POC</h1>
         <form>
-            <textarea id="TextArea" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here"></textarea>
+            <textarea id="TextArea" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onkeyup="emitToAll()"></textarea>
             <br>
             <button type="submit" form="TextArea" value="Submit" onclick="myFunction()">Submit</button>
         </form>
