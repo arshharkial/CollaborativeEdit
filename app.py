@@ -41,18 +41,21 @@ def update_text(message):
         versions = file.read()
     if versions:
         versions = json.loads(versions)
-        print(versions)
         version_number = len(versions.get("files")) + 1
         data = {"Version": version_number, "Data": message}
         if "files" in versions and versions["files"]:
             versions["files"].append(data)
-        print(versions)
     else:
         versions = {}
         versions["files"] = [{"Version": 1, "Data": message}]
     with open("text.json", "w+") as file:
         file.write(json.dumps(versions, indent=4))
         emit("UpdateText", message, broadcast=True)
+
+
+@sio.on("UpdateAll")
+def update_all(message):
+    emit("UpdateText", message, broadcast=True)
 
 
 @sio.on("disconnect")
