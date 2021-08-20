@@ -17,6 +17,15 @@ sio.on("UpdateText", (message) => {
     console.log("Message Received");
 });
 
+function isTyping(){
+    sio.emit("sendSessionID")
+}
+
+sio.on("isTyping", (sid) => {
+    setTimeout(() => { document.getElementById("typing_on").innerHTML = " "; }, 2000);
+    document.getElementById("typing_on").innerHTML = `${sid} is typing`;
+});
+
 function myFunction(TextArea){
     sio.emit("TextUpdated", {"TextArea": TextArea, "Data": document.getElementById(TextArea).value});
     console.log("Button Clicked");

@@ -66,6 +66,11 @@ def update_text(message):
         emit("UpdateText", message, broadcast=True)
 
 
+@sio.on("sendSessionID")
+def send_sessoin_id():
+    emit("isTyping", request.sid, broadcast=True)
+
+
 @sio.on("disconnect")
 def test_disconnect():
     print(f"{request.sid} disconnected")
