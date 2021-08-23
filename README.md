@@ -30,3 +30,4 @@ switch to older version of eventlet solved the problem i.e. `pip install eventle
 
 npm install mongodb
 npm install --save sharedb
+npm install --save sharedb-mongo
