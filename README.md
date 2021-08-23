@@ -25,3 +25,8 @@ In case of
 > Gunicorn ImportError: cannot import name 'ALREADY_HANDLED' from 'eventlet.wsgi' in docker
 
 switch to older version of eventlet solved the problem i.e. `pip install eventlet==0.30.2`
+
+## Node Modules
+
+npm install mongodb
+npm install --save sharedb
