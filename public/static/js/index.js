@@ -17,13 +17,13 @@ sio.on("UpdateText", (message) => {
     console.log("Message Received");
 });
 
-function isTyping(){
-    sio.emit("sendSessionID")
+function isTyping(textarea){
+    sio.emit("sendSessionID", textarea)
 }
 
-sio.on("isTyping", (sid) => {
-    setTimeout(() => { document.getElementById("typing_on").innerHTML = " "; }, 2000);
-    document.getElementById("typing_on").innerHTML = `${sid} is typing`;
+sio.on("isTyping", (sid, textarea) => {
+    setTimeout(() => { document.getElementById(textarea).innerHTML = " "; }, 500);
+    document.getElementById(textarea).innerHTML = `${sid} is typing`;
 });
 
 function myFunction(TextArea){

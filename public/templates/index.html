@@ -8,30 +8,35 @@
     <body>
         <h1>Collaborative Editing POC</h1>
         <form>
-            <textarea id="TextArea1" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea1')" onkeyup="isTyping()"></textarea>
+            <textarea id="TextArea1" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea1', 'typing_on_textarea1')" onkeyup="isTyping('typing_on_textarea1')" onchange="stopTyping('typing_on_textarea1')"></textarea>
             <br>
             <!-- <button type="submit" form="TextArea" value="Submit" onclick="myFunction('TextArea1')">Submit</button> -->
+            <div id="typing_on_textarea1"> </div> 
         </form>
         <form>
-            <textarea id="TextArea2" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea2')" onkeyup="isTyping()"></textarea>
+            <textarea id="TextArea2" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea2', 'typing_on_textarea2')" onkeyup="isTyping('typing_on_textarea2')" onchange="stopTyping('typing_on_textarea2')"></textarea>
             <br>
             <!-- <button type="submit" form="TextArea" value="Submit" onclick="myFunction('TextArea2')">Submit</button> -->
+            <div id="typing_on_textarea2"> </div> 
         </form>
         <form>
-            <textarea id="TextArea3" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea3')" onkeyup="isTyping()"></textarea>
+            <textarea id="TextArea3" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea3', 'typing_on_textarea3')" onkeyup="isTyping('typing_on_textarea3')" onchange="stopTyping('typing_on_textarea3')"></textarea>
             <br>
             <!-- <button type="submit" form="TextArea" value="Submit" onclick="myFunction('TextArea3')">Submit</button> -->
+            <div id="typing_on_textarea3"> </div> 
         </form>
         <form>
-            <textarea id="TextArea4" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea4')" onkeyup="isTyping()"></textarea>
+            <textarea id="TextArea4" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea4', 'typing_on_textarea4')" onkeyup="isTyping('typing_on_textarea4')" onchange="stopTyping('typing_on_textarea4')"></textarea>
             <br>
             <!-- <button type="submit" form="TextArea" value="Submit" onclick="myFunction('TextArea4')">Submit</button> -->
+            <div id="typing_on_textarea4"> </div> 
         </form>
         <form>
-            <textarea id="TextArea5" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea5')" onkeyup="isTyping()"></textarea>
+            <textarea id="TextArea5" name="TextBox" rows="10" cols="150" placeholder="Enter Text Here" onchange="myFunction('TextArea5', 'typing_on_textarea5')" onkeyup="isTyping('typing_on_textarea5')" onchange="stopTyping('typing_on_textarea5')"></textarea>
             <br>
             <!-- <button type="submit" form="TextArea" value="Submit" onclick="myFunction('TextArea5')">Submit</button> -->
+            <div id="typing_on_textarea5"> </div> 
         </form>
-        <div id="typing_on"> </div> 
+        
         </body>
 </html>

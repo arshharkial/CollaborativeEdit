@@ -67,8 +67,8 @@ def update_text(message):
 
 
 @sio.on("sendSessionID")
-def send_sessoin_id():
-    emit("isTyping", request.sid, broadcast=True)
+def send_sessoin_id(textarea):
+    emit("isTyping", (request.sid, textarea), broadcast=True)
 
 
 @sio.on("disconnect")
